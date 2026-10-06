@@ -852,7 +852,7 @@ export default function App() {
                 <div className="col-span-5 order-2 md:order-1 mt-6 md:mt-0">
                   <h5 className="text-3xl font-bold text-white mb-4">GamesDom</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-5">
-                    A portal for free browser games — a searchable catalog where every title gets its own page and plays instantly, with nothing to install.
+                    A portal for free browser games - a searchable catalog where every title gets its own page and plays instantly, with nothing to install.
                   </p>
                   <p className="text-zinc-500 text-sm leading-relaxed mb-6">
                     Working today: catalog with live search and suggestions, per-game pages, Snake Arena and Tic Tac Toe playable. Next up: the remaining games and player accounts.
