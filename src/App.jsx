@@ -884,7 +884,7 @@ export default function App() {
             <Reveal delay={200}>
               <div className="flex gap-6">
                 <a href="https://github.com/eleena1301" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white hover:-translate-y-1 transition-all">GitHub</a>
-                <a href="https://linkedin.com/in/eleena-1301" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white hover:-translate-y-1 transition-all">LinkedIn</a>
+                <a href="https://linkedin.com/in/eleena1301" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white hover:-translate-y-1 transition-all">LinkedIn</a>
               </div>
             </Reveal>
           </div>
