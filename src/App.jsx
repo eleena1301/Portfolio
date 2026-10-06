@@ -621,10 +621,8 @@ const GamesDomAnim = () => {
 
 /* ------------------------------------------------------------------
    UTILITY KIT — both tools live on one site, so they share one card.
-   Replace the URL below in this one place.
+   When it launches at https://elestack.com, turn the card back into a link.
 ------------------------------------------------------------------ */
-const UTILITY_KIT_URL = "https://elestack.com";
-
 const TOOLS = ["JSON ⇄ CSV", "JSON Formatter"];
 
 const ToolShowcase = () => {
@@ -828,23 +826,24 @@ export default function App() {
 
           <div className="space-y-32">
 
-            {/* One card: both tools ship as part of the same site */}
+            {/* One card: both tools ship as part of the same site.
+                Not live yet, so this is a div, not a link. */}
             <Reveal>
-              <a href={UTILITY_KIT_URL} target="_blank" rel="noopener noreferrer" className="group block md:grid grid-cols-12 gap-8 items-center">
-                <div className="col-span-7 bg-zinc-900/50 aspect-video rounded-2xl overflow-hidden border border-zinc-800 group-hover:border-emerald-500/50 transition-colors relative flex items-center justify-center mb-6 md:mb-0">
-                  <div className="absolute inset-0 bg-linear-to-tr from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="block md:grid grid-cols-12 gap-8 items-center">
+                <div className="col-span-7 bg-zinc-900/50 aspect-video rounded-2xl overflow-hidden border border-zinc-800 relative flex items-center justify-center mb-6 md:mb-0">
                   <ToolShowcase />
                 </div>
                 <div className="col-span-5">
-                  <h5 className="text-3xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">Utility Kit</h5>
+                  <h5 className="text-3xl font-bold text-white mb-4">Utility Kit</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-6">
                     A toolkit for everyday developer chores: convert structured data between JSON and CSV, and beautify or validate minified payloads. Every tool runs entirely in the browser, so nothing you paste is ever sent to a server.
                   </p>
-                  <span className="text-emerald-500 text-sm font-bold tracking-widest uppercase flex items-center gap-2">
-                    View Project <span className="group-hover:translate-x-2 transition-transform">→</span>
+                  <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-emerald-500">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Coming soon
                   </span>
                 </div>
-              </a>
+              </div>
             </Reveal>
 
             {/* GamesDom — no link yet, so this card is a div, not an anchor */}
