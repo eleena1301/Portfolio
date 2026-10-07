@@ -199,12 +199,34 @@ const Styles = () => (
     .exp-row  { gap: 48px; padding-top: 48px; padding-bottom: 64px; }
     .exp-date { width: 200px; flex-shrink: 0; padding-top: 10px; }
 
+    /* ---------- NAV ---------- */
+    html { scroll-behavior: smooth; }
+    /* sections land below the fixed bar instead of under it */
+    section[id] { scroll-margin-top: 72px; }
+    .nav-bar   { height: 64px; padding: 0 24px; border-bottom: 1px solid transparent;
+                 transition: background-color .4s ease, border-color .4s ease; }
+    .nav-bar.is-scrolled { background-color: rgba(9,9,11,.75); border-color: #18181b;
+                           backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-links { gap: 32px; }
+
+    /* ---------- ABOUT ---------- */
+    .about-grid  { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; margin-top: 72px; }
+    .about-bio   { display: flex; flex-direction: column; gap: 22px; }
+    .about-side  { display: flex; flex-direction: column; gap: 40px; }
+    .about-label { margin-bottom: 14px; }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .about-chip  { padding: 4px 10px; }
+    .about-edu   { display: flex; flex-direction: column; gap: 18px; }
+
     /* ---------- MOBILE ---------- */
     @media (max-width: 767px) {
       /* Date sits above the role on narrow screens, so a fixed 200px column
          just adds dead space. */
       .exp-date { width: auto; padding-top: 0; }
       .exp-row  { gap: 18px; padding-top: 36px; padding-bottom: 44px; }
+      .nav-bar   { padding: 0 16px; }
+      .nav-links { gap: 18px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
     }
 
     @media (max-width: 640px) {
@@ -222,6 +244,7 @@ const Styles = () => (
 
     /* Static, fully legible fallback for reduced-motion users */
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
       .rb-float, .rb-eye, .rb-wave, .rb-hand, .rb-armidle,
       .gc-row, .gc-cell, .gc-flow, .gc-scan,
       .jf-line, .jf-badge, .jf-caret,
@@ -664,6 +687,99 @@ const ToolShowcase = () => {
 };
 
 /* ------------------------------------------------------------------
+   ABOUT — headline, a short bio, and the skills / education sidebar.
+   Everything here comes from the resume; keep the two in sync.
+------------------------------------------------------------------ */
+const SKILLS = [
+  { group: "Languages", items: ["JavaScript", "Python", "HTML5", "CSS"] },
+  { group: "Frameworks", items: ["React", "Tailwind CSS", "Flask", "Node.js"] },
+  { group: "Databases", items: ["PostgreSQL", "MySQL"] },
+  { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma", "Colab"] },
+];
+
+const EDUCATION = [
+  { degree: "Master of Computer Applications", school: "K.R. Mangalam University, Gurugram", period: "2022 — 2024" },
+  { degree: "Bachelor of Computer Applications", school: "St. Xavier's College, Jaipur", period: "2018 — 2021" },
+];
+
+const About = () => (
+  <section id="about" className="px-6 max-w-5xl mx-auto py-32">
+    <Reveal>
+      <h4 className="text-sm font-bold text-emerald-500 tracking-widest uppercase text-center" style={{ marginBottom: 56 }}>
+        About
+      </h4>
+      <h3 className="text-3xl md:text-5xl font-medium leading-tight text-white">
+        I build <span className="text-emerald-400">fast, secure, and scalable</span> web applications. Passionate about creating seamless user experiences and robust architectures.
+      </h3>
+    </Reveal>
+
+    <div className="about-grid">
+      <Reveal delay={100}>
+        <div className="about-bio text-lg leading-relaxed text-zinc-400">
+          <p>
+            I'm a full stack developer with over a year of
+            experience building web and Android applications. At{" "}
+            <span className="text-white">Dr. Herald Innovations</span> I built the
+            company's website and an Android music-streaming prototype, working
+            across the whole stack: UI, APIs, authentication, testing, and deployment.
+          </p>
+          <p>
+            Outside of work I'm building <span className="text-white">EleStack</span>, the
+            name all my independent products ship under. The first two are{" "}
+            <span className="text-white">Utility Kit</span>, a set of browser-only tools for
+            converting and formatting data, and <span className="text-white">GamesDom</span>,
+            a free browser-games portal built with Python, Flask, and PostgreSQL.
+          </p>
+          <p>
+            Before that I was a machine learning intern at Cognifyz Technologies,
+            collecting, cleaning, and analysing datasets in Python. That gave me
+            a soft spot for the data side of an app, not just the interface.
+          </p>
+        </div>
+      </Reveal>
+
+      <Reveal delay={200}>
+        <div className="about-side">
+          <div>
+            <p className="about-label font-mono text-xs uppercase tracking-widest text-zinc-600">Skills</p>
+            <div className="about-edu">
+              {SKILLS.map((s) => (
+                <div key={s.group}>
+                  <p className="text-sm text-emerald-500" style={{ marginBottom: 8 }}>{s.group}</p>
+                  <div className="about-chips">
+                    {s.items.map((item) => (
+                      <span
+                        key={item}
+                        className="about-chip rounded-full border border-zinc-800 bg-zinc-900/60 font-mono text-xs text-zinc-400"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="about-label font-mono text-xs uppercase tracking-widest text-zinc-600">Education</p>
+            <div className="about-edu">
+              {EDUCATION.map((e) => (
+                <div key={e.degree}>
+                  <p className="text-white font-semibold">{e.degree}</p>
+                  <p className="text-sm text-zinc-500">{e.school}</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-zinc-600" style={{ marginTop: 4 }}>{e.period}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+);
+
+/* ------------------------------------------------------------------
    EXPERIENCE — work history. The music app was built for Dr. Herald
    Innovations, so it lives here as a contribution rather than as a
    personal project card.
@@ -692,7 +808,7 @@ const ROLES = [
 ];
 
 const Experience = () => (
-  <section className="px-6 max-w-5xl mx-auto pt-12 pb-32">
+  <section id="experience" className="px-6 max-w-5xl mx-auto pt-12 pb-32">
     <Reveal>
       <h4
         className="text-sm font-bold text-emerald-500 tracking-widest uppercase text-center"
@@ -743,6 +859,48 @@ const Experience = () => (
   </section>
 );
 
+/* ------------------------------------------------------------------
+   NAV — fixed bar of anchor links. Transparent over the hero, then
+   picks up a blurred backdrop once the page scrolls under it.
+------------------------------------------------------------------ */
+const NAV_LINKS = [
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
+];
+
+const Nav = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav className={`nav-bar fixed inset-x-0 top-0 z-50 flex items-center justify-between ${scrolled ? "is-scrolled" : ""}`}>
+      <a href="#top" aria-label="Back to top" className="flex items-center">
+        <img src="/logo.svg" alt="EleStack" className="h-5 w-auto" width="33" height="20" />
+      </a>
+      <ul className="nav-links flex items-center">
+        {NAV_LINKS.map((l) => (
+          <li key={l.href}>
+            <a
+              href={l.href}
+              className="font-mono text-xs uppercase tracking-widest text-zinc-500 hover:text-emerald-400 transition-colors"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
 export default function App() {
   return (
     <div className="bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30 overflow-x-hidden">
@@ -750,6 +908,7 @@ export default function App() {
         tooltip) can extend past the viewport on narrow screens, and any
         overflow gives the whole page a horizontal scrollbar. */}
       <Styles />
+      <Nav />
 
       {/* Subtle Cinematic Background Glow */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-zinc-900/40 via-zinc-950 to-zinc-950"></div>
@@ -760,7 +919,7 @@ export default function App() {
         {/* --- 1. HERO SECTION (Full Height) --- */}
         {/* Mobile: anchored near the top instead of centred, and svh so the
             browser address bar doesn't push everything down. */}
-        <section className="min-h-svh flex flex-col justify-start pt-[28vh] md:justify-center md:pt-0 items-center text-center px-6 relative">
+        <section id="top" className="min-h-svh flex flex-col justify-start pt-[28vh] md:justify-center md:pt-0 items-center text-center px-6 relative">
           <Reveal delay={100}>
             {/* Logo lives at public/logo.svg — Vite serves public/ from the
                 site root, so the src is "/logo.svg" (no import needed).
@@ -802,26 +961,35 @@ export default function App() {
         </section>
 
         {/* --- 2. ABOUT SECTION --- */}
-        <section className="min-h-[70vh] flex items-center px-6 max-w-4xl mx-auto py-16">
-          <Reveal>
-            <h3 className="text-3xl md:text-5xl font-medium leading-tight text-white">
-              I build <span className="text-emerald-400">fast, secure, and scalable</span> web applications. Passionate about creating seamless user experiences and robust architectures.
-            </h3>
-            <div className="mt-12 flex gap-4 text-sm font-mono text-zinc-500 uppercase tracking-widest">
-              <span>React</span> • <span>Tailwind</span> • <span>Node.js</span>
-            </div>
-          </Reveal>
-        </section>
+        <About />
 
         {/* --- 3. EXPERIENCE SECTION --- */}
         <Experience />
 
         {/* --- 4. PROJECTS SECTION --- */}
-        <section className="min-h-screen px-6 max-w-5xl mx-auto py-24 flex flex-col justify-center">
+        <section id="work" className="min-h-screen px-6 max-w-5xl mx-auto py-24 flex flex-col justify-center">
           <Reveal>
             <h4 className="text-sm font-bold text-emerald-500 tracking-widest uppercase mb-16 text-center">
               Selected Works
             </h4>
+          </Reveal>
+
+          {/* EleStack intro — both projects below ship under this name.
+              When https://elestack.com goes live, link the logo row to it. */}
+          <Reveal>
+            <div
+              className="rounded-2xl border border-zinc-800 bg-zinc-900/40 text-center"
+              style={{ padding: "36px 28px", marginBottom: 96 }}
+            >
+              <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
+                <img src="/logo.svg" alt="" className="h-6 w-auto" width="40" height="24" />
+                <span className="text-lg font-bold text-white tracking-widest uppercase">EleStack</span>
+              </div>
+              <p className="text-zinc-400 text-lg leading-relaxed mx-auto" style={{ maxWidth: 600 }}>
+                My independent product label. Every tool and game I build on my own
+                ships under EleStack, starting with the two projects below.
+              </p>
+            </div>
           </Reveal>
 
           <div className="space-y-32">
@@ -834,6 +1002,7 @@ export default function App() {
                   <ToolShowcase />
                 </div>
                 <div className="col-span-5">
+                  <p className="font-mono text-xs uppercase tracking-widest text-zinc-600 mb-2">An EleStack product</p>
                   <h5 className="text-3xl font-bold text-white mb-4">Utility Kit</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-6">
                     A toolkit for everyday developer chores: convert structured data between JSON and CSV, and beautify or validate minified payloads. Every tool runs entirely in the browser, so nothing you paste is ever sent to a server.
@@ -850,6 +1019,7 @@ export default function App() {
             <Reveal delay={100}>
               <div className="group block md:grid grid-cols-12 gap-8 items-center">
                 <div className="col-span-5 order-2 md:order-1 mt-6 md:mt-0">
+                  <p className="font-mono text-xs uppercase tracking-widest text-zinc-600 mb-2">An EleStack product</p>
                   <h5 className="text-3xl font-bold text-white mb-4">GamesDom</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-5">
                     A portal for free browser games - a searchable catalog where every title gets its own page and plays instantly, with nothing to install.
@@ -872,7 +1042,7 @@ export default function App() {
         </section>
 
         {/* --- 5. FOOTER & CONTACT --- */}
-        <section className="py-32 px-6 border-t border-zinc-900 relative">
+        <section id="contact" className="py-32 px-6 border-t border-zinc-900 relative">
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <Reveal>
               <div className="text-center md:text-left">
