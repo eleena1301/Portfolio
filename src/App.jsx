@@ -643,8 +643,8 @@ const GamesDomAnim = () => {
 };
 
 /* ------------------------------------------------------------------
-   UTILITY KIT — both tools live on one site, so they share one card.
-   When it launches at https://elestack.com, turn the card back into a link.
+   UTILITY KIT — both tools live on one site (https://elestack.com),
+   so they share one card.
 ------------------------------------------------------------------ */
 const TOOLS = ["JSON ⇄ CSV", "JSON Formatter"];
 
@@ -974,17 +974,22 @@ export default function App() {
             </h4>
           </Reveal>
 
-          {/* EleStack intro — both projects below ship under this name.
-              When https://elestack.com goes live, link the logo row to it. */}
+          {/* EleStack intro — both projects below ship under this name */}
           <Reveal>
             <div
               className="rounded-2xl border border-zinc-800 bg-zinc-900/40 text-center"
               style={{ padding: "36px 28px", marginBottom: 96 }}
             >
-              <div className="flex items-center justify-center gap-3" style={{ marginBottom: 16 }}>
+              <a
+                href="https://elestack.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 text-white hover:text-emerald-400 transition-colors"
+                style={{ marginBottom: 16 }}
+              >
                 <img src="/logo.svg" alt="" className="h-6 w-auto" width="40" height="24" />
-                <span className="text-lg font-bold text-white tracking-widest uppercase">EleStack</span>
-              </div>
+                <span className="text-lg font-bold tracking-widest uppercase">EleStack</span>
+              </a>
               <p className="text-zinc-400 text-lg leading-relaxed mx-auto" style={{ maxWidth: 600 }}>
                 My independent product label. Every tool and game I build on my own
                 ships under EleStack, starting with the two projects below.
@@ -994,25 +999,29 @@ export default function App() {
 
           <div className="space-y-32">
 
-            {/* One card: both tools ship as part of the same site.
-                Not live yet, so this is a div, not a link. */}
+            {/* One card: both tools ship as part of the same site, live at elestack.com */}
             <Reveal>
-              <div className="block md:grid grid-cols-12 gap-8 items-center">
-                <div className="col-span-7 bg-zinc-900/50 aspect-video rounded-2xl overflow-hidden border border-zinc-800 relative flex items-center justify-center mb-6 md:mb-0">
+              <a
+                href="https://elestack.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block md:grid grid-cols-12 gap-8 items-center"
+              >
+                <div className="col-span-7 bg-zinc-900/50 aspect-video rounded-2xl overflow-hidden border border-zinc-800 group-hover:border-emerald-500/50 transition-colors relative flex items-center justify-center mb-6 md:mb-0">
                   <ToolShowcase />
                 </div>
                 <div className="col-span-5">
                   <p className="font-mono text-xs uppercase tracking-widest text-zinc-600 mb-2">An EleStack product</p>
-                  <h5 className="text-3xl font-bold text-white mb-4">Utility Kit</h5>
+                  <h5 className="text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-4">Utility Kit</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-6">
                     A toolkit for everyday developer chores: convert structured data between JSON and CSV, and beautify or validate minified payloads. Every tool runs entirely in the browser, so nothing you paste is ever sent to a server.
                   </p>
                   <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-emerald-500">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Coming soon
+                    Live · elestack.com ↗
                   </span>
                 </div>
-              </div>
+              </a>
             </Reveal>
 
             {/* GamesDom — no link yet, so this card is a div, not an anchor */}
