@@ -643,7 +643,7 @@ const GamesDomAnim = () => {
 };
 
 /* ------------------------------------------------------------------
-   UTILITY KIT — both tools live on one site (https://elestack.com),
+   UTILITY KIT — both tools live on one site (https://jsoncsvvisualizer.com),
    so they share one card.
 ------------------------------------------------------------------ */
 const TOOLS = ["JSON ⇄ CSV", "JSON Formatter"];
@@ -981,7 +981,7 @@ export default function App() {
               style={{ padding: "36px 28px", marginBottom: 96 }}
             >
               <a
-                href="https://elestack.com"
+                href="https://jsoncsvvisualizer.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 text-white hover:text-emerald-400 transition-colors"
@@ -999,10 +999,10 @@ export default function App() {
 
           <div className="space-y-32">
 
-            {/* One card: both tools ship as part of the same site, live at elestack.com */}
+            {/* One card: both tools ship as part of the same site, live at jsoncsvvisualizer.com */}
             <Reveal>
               <a
-                href="https://elestack.com"
+                href="https://jsoncsvvisualizer.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block md:grid grid-cols-12 gap-8 items-center"
@@ -1018,7 +1018,7 @@ export default function App() {
                   </p>
                   <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-emerald-500">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Live · elestack.com ↗
+                    Live · jsoncsvvisualizer.com ↗
                   </span>
                 </div>
               </a>

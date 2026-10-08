@@ -1,6 +1,6 @@
 # EleStack — Eleena's Portfolio
 
-Personal portfolio site for Eleena, Full Stack Developer. Live at [portfolio.elestack.com](https://portfolio.elestack.com).
+Personal portfolio site for Eleena, Full Stack Developer. Live at [elestack.com](https://elestack.com).
 
 Built with React, Vite, and Tailwind CSS.
 
