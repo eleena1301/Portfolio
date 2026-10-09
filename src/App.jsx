@@ -643,7 +643,7 @@ const GamesDomAnim = () => {
 };
 
 /* ------------------------------------------------------------------
-   UTILITY KIT — both tools live on one site (https://jsoncsvvisualizer.com),
+   JSON CSV VISUALIZER — both tools live on one site (https://jsoncsvvisualizer.com),
    so they share one card.
 ------------------------------------------------------------------ */
 const TOOLS = ["JSON ⇄ CSV", "JSON Formatter"];
@@ -726,7 +726,7 @@ const About = () => (
           <p>
             Outside of work I'm building <span className="text-white">EleStack</span>, the
             name all my independent products ship under. The first two are{" "}
-            <span className="text-white">Utility Kit</span>, a set of browser-only tools for
+            <span className="text-white">JSON CSV Visualizer</span>, a set of browser-only tools for
             converting and formatting data, and <span className="text-white">GamesDom</span>,
             a free browser-games portal built with Python, Flask, and PostgreSQL.
           </p>
@@ -1012,7 +1012,7 @@ export default function App() {
                 </div>
                 <div className="col-span-5">
                   <p className="font-mono text-xs uppercase tracking-widest text-zinc-600 mb-2">An EleStack product</p>
-                  <h5 className="text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-4">Utility Kit</h5>
+                  <h5 className="text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-4">JSON CSV Visualizer</h5>
                   <p className="text-zinc-400 text-lg leading-relaxed mb-6">
                     A toolkit for everyday developer chores: convert structured data between JSON and CSV, and beautify or validate minified payloads. Every tool runs entirely in the browser, so nothing you paste is ever sent to a server.
                   </p>
