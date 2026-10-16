@@ -191,6 +191,14 @@ const Styles = () => (
     .gd-placeholder { animation: gdPlaceholder 6s ease-in-out infinite; }
     .gd-query       { animation: gdQuery 6s ease-in-out infinite; }
 
+    /* ---------- CLIENT PROJECT: ENOSH ENGINEERING ---------- */
+    @keyframes enSend {
+      0%, 14%   { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+      20%       { transform: scale(.92); box-shadow: 0 0 0 4px rgba(16,185,129,.35); }
+      28%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+    .en-send { animation: enSend 6s ease-in-out infinite; }
+
     /* ---------- LAYOUT (kept in CSS, not Tailwind) ----------
        These carry media queries, which inline styles can't express — and
        this project's Tailwind build has been dropping some spacing/width
@@ -248,7 +256,7 @@ const Styles = () => (
       .rb-float, .rb-eye, .rb-wave, .rb-hand, .rb-armidle,
       .gc-row, .gc-cell, .gc-flow, .gc-scan,
       .jf-line, .jf-badge, .jf-caret,
-      .gd-tile, .gd-keep, .gd-placeholder {
+      .gd-tile, .gd-keep, .gd-placeholder, .en-send {
         animation: none !important; opacity: 1 !important; transform: none !important;
       }
       .jf-min, .gd-query { display: none !important; }
@@ -643,6 +651,90 @@ const GamesDomAnim = () => {
 };
 
 /* ------------------------------------------------------------------
+   CLIENT PROJECT ANIMATION — Enosh Engineering's enquiry pipeline:
+   the form is sent, a row lands in the tracker sheet, the owner is alerted.
+------------------------------------------------------------------ */
+const ENOSH_URL = ""; // add the live site URL here to make the card a link
+
+const SHEET_ROWS = [
+  { who: "A. Verma", status: "Quoted", tone: "text-sky-300" },
+  { who: "R. Singh", status: "Won", tone: "text-emerald-300" },
+];
+
+// Anchor when there's a URL, plain div otherwise (same idea as the GamesDom card)
+const ClientCard = ({ href, children }) => {
+  const className = "group block md:grid grid-cols-12 gap-8 items-center";
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
+  ) : (
+    <div className={className}>{children}</div>
+  );
+};
+
+const EnoshAnim = () => {
+  const steps = ["01 / VISITOR ENQUIRES", "02 / LOGGED TO SHEET", "03 / OWNER ALERTED"];
+
+  return (
+    <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ gap: 16 }}>
+      <div className="flex items-center" style={{ gap: 12 }}>
+        {/* enquiry form */}
+        <div className="rounded-lg border border-zinc-700 bg-zinc-900" style={{ width: 92, padding: 8 }}>
+          <p className="font-mono uppercase tracking-widest text-zinc-500" style={{ fontSize: 7, marginBottom: 6 }}>Enquiry</p>
+          {[70, 54, 76].map((w) => (
+            <div key={w} className="rounded-sm bg-zinc-700/70" style={{ width: `${w}%`, height: 4, marginBottom: 5 }} />
+          ))}
+          <div className="rounded-sm border border-zinc-700" style={{ height: 14, marginBottom: 6 }} />
+          <div
+            className="en-send rounded-sm bg-emerald-500/80 text-center font-mono font-bold text-zinc-950"
+            style={{ fontSize: 7, padding: "2px 0" }}
+          >
+            SEND
+          </div>
+        </div>
+
+        <span className="gc-flow font-mono text-emerald-500" style={{ fontSize: 12 }}>→</span>
+
+        {/* tracker sheet */}
+        <div className="relative rounded-lg border border-zinc-700 bg-zinc-900 font-mono" style={{ width: 150, fontSize: 7 }}>
+          <div className="flex justify-between border-b border-zinc-700 text-zinc-500 uppercase tracking-widest" style={{ padding: "5px 8px" }}>
+            <span>Client</span><span>Status</span>
+          </div>
+          {SHEET_ROWS.map((r) => (
+            <div key={r.who} className="flex justify-between border-b border-zinc-800 text-zinc-400" style={{ padding: "4px 8px" }}>
+              <span>{r.who}</span><span className={r.tone}>{r.status}</span>
+            </div>
+          ))}
+          <div className="jf-line flex justify-between bg-emerald-500/10 text-emerald-200" style={{ padding: "4px 8px" }}>
+            <span>New lead</span><span className="text-amber-300">New</span>
+          </div>
+
+          {/* alert badge */}
+          <span
+            className="jf-badge absolute rounded-full border border-emerald-500/60 bg-zinc-950 text-emerald-300 whitespace-nowrap"
+            style={{ right: -8, top: -10, padding: "2px 7px", fontSize: 7 }}
+          >
+            ✉ owner alerted
+          </span>
+        </div>
+      </div>
+
+      {/* stepped caption */}
+      <div className="relative h-4 w-full">
+        {steps.map((s, i) => (
+          <span
+            key={s}
+            className="cap absolute inset-x-0 text-center font-mono uppercase tracking-widest text-zinc-500"
+            style={{ animationDelay: `${i * 2}s`, fontSize: 9 }}
+          >
+            {s}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ------------------------------------------------------------------
    JSON CSV VISUALIZER — both tools live on one site (https://jsoncsvvisualizer.com),
    so they share one card.
 ------------------------------------------------------------------ */
@@ -694,7 +786,7 @@ const SKILLS = [
   { group: "Languages", items: ["JavaScript", "Python", "HTML5", "CSS"] },
   { group: "Frameworks", items: ["React", "Tailwind CSS", "Flask", "Node.js"] },
   { group: "Databases", items: ["PostgreSQL", "MySQL"] },
-  { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma", "Colab"] },
+  { group: "Tools", items: ["Git", "GitHub", "VS Code", "Figma", "Colab", "Google Apps Script"] },
 ];
 
 const EDUCATION = [
@@ -722,6 +814,12 @@ const About = () => (
             <span className="text-white">Dr. Herald Innovations</span> I built the
             company's website and an Android music-streaming prototype, working
             across the whole stack: UI, APIs, authentication, testing, and deployment.
+          </p>
+          <p>
+            Since March 2026 I've been freelancing under EleStack. For{" "}
+            <span className="text-white">Enosh Engineering</span>, a precision-component
+            manufacturer in Bhiwadi, I built and deployed their website and automated
+            how they handle enquiries, so every lead lands in a tracker the moment it arrives.
           </p>
           <p>
             Outside of work I'm building <span className="text-white">EleStack</span>, the
@@ -785,6 +883,17 @@ const About = () => (
    personal project card.
 ------------------------------------------------------------------ */
 const ROLES = [
+  {
+    period: "Mar 2026 — Present",
+    title: "Freelance Web Developer & Automation Consultant",
+    org: "EleStack · Client: Enosh Engineering",
+    place: "Bhiwadi",
+    points: [
+      "Built and deployed a responsive multi-page website for a precision machine-component manufacturer using HTML, Tailwind CSS, and JavaScript — mobile navigation, a client showcase, and a shared layout so every page stays consistent.",
+      "Automated enquiry handling with Google Apps Script and Google Sheets: every lead is logged with a status tracker, the owner is alerted by email, and the customer gets a branded confirmation.",
+      "Protected the enquiry form with a verification check, a honeypot, input validation, and an offensive-language filter enforced on both the website and the script.",
+    ],
+  },
   {
     period: "Jul 2025 — Feb 2026",
     title: "Assistant Software Developer",
@@ -991,8 +1100,8 @@ export default function App() {
                 <span className="text-lg font-bold tracking-widest uppercase">EleStack</span>
               </a>
               <p className="text-zinc-400 text-lg leading-relaxed mx-auto" style={{ maxWidth: 600 }}>
-                My independent product label. Every tool and game I build on my own
-                ships under EleStack, starting with the two projects below.
+                My independent product label and freelance studio. Every tool and game
+                I build on my own ships under EleStack, and it's how I take on client work.
               </p>
             </div>
           </Reveal>
@@ -1046,6 +1155,29 @@ export default function App() {
                   <GamesDomAnim />
                 </div>
               </div>
+            </Reveal>
+
+            {/* Enosh Engineering — client work; becomes a link once ENOSH_URL is set */}
+            <Reveal delay={100}>
+              <ClientCard href={ENOSH_URL}>
+                <div className="col-span-7 bg-zinc-900/50 aspect-video rounded-2xl overflow-hidden border border-zinc-800 group-hover:border-emerald-500/50 transition-colors relative flex items-center justify-center mb-6 md:mb-0">
+                  <EnoshAnim />
+                </div>
+                <div className="col-span-5">
+                  <p className="font-mono text-xs uppercase tracking-widest text-zinc-600 mb-2">Client project · EleStack</p>
+                  <h5 className="text-3xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-4">Enosh Engineering</h5>
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-5">
+                    Website and lead automation for a precision machine-component manufacturer. A responsive multi-page site with a client showcase, plus an enquiry pipeline that logs every lead to Google Sheets, alerts the owner, and emails the customer a confirmation.
+                  </p>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-6">
+                    HTML, Tailwind CSS, JavaScript, Google Apps Script. Spam and offensive-language filtering on both the site and the script.
+                  </p>
+                  <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-emerald-500">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    {ENOSH_URL ? `Live · ${ENOSH_URL.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")} ↗` : "Deployed · client site"}
+                  </span>
+                </div>
+              </ClientCard>
             </Reveal>
           </div>
         </section>
